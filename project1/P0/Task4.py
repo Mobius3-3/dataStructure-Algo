@@ -15,7 +15,7 @@ with open('calls.csv', 'r') as f:
 res = []
 for i in calls:
     for j in texts:
-        if '(' not in i[0] and i[0] not in j[0]:
+        if i[0] not in j[0]:
             res.append(i[0])
 
 print("These numbers could be telemarketers: \n")

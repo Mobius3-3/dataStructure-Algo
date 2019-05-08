@@ -38,7 +38,7 @@ for i in calls:
         if '(080)' in i[1]:
             j+=1
             
-rate = round(j/n,2)
+rate = round(j/n*100,2)
 
 print("{} percent of calls from fixed lines in Bangalore are calls \
 to other fixed lines in Bangalore.".format(rate))
