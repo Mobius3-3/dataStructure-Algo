@@ -2,6 +2,7 @@
 Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
+### running time analysis: for part A is O(n^2), for part B is O(n)
 import csv
 
 with open('texts.csv', 'r') as f:
