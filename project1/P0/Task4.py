@@ -11,16 +11,21 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
+all=[]
+outer = []
 
-res = []
 for i in calls:
-    for j in texts:
-        if i[0] not in j[0]:
-            res.append(i[0])
+    all.append(i[0])
+    outer.append(i[1])
+for i in texts:
+    outer.append(i[0])
+    outer.append(i[1])
+
+                    
 
 print("These numbers could be telemarketers: \n")
 
-for i in sorted(list(set(res))):
+for i in sorted(list(set(all)-set(outer))):
   print(i+'\n')
 
 """
