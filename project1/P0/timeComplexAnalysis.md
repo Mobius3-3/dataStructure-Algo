@@ -1,0 +1,10 @@
+- Task0:
+	- running time analysis:  O(1)
+- Task1:
+	- running time analysis:  O(n)
+- Task2:
+	- running time analysis:  O(n)
+- Task3:
+	- running time analysis: for part A is O(n^2), for part B is O(n)
+- Task4:
+	- running time analysis: O(n)
