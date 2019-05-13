@@ -7,4 +7,4 @@
 - Task3:
 	- running time analysis: for part A is O(n^2), for part B is O(n)
 - Task4:
-	- running time analysis: O(n)
+	- running time analysis: O(nlogn)
