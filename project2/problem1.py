@@ -1,41 +1,46 @@
-from collections import deque
+from collections import deque, OrderedDict
 
 class LRU_Cache(object):
     
     def __init__(self, capacity):
         self.capacity = capacity
         self.num_data = 0
-        self.data = dict({})
-        self.queue_key = deque()
+        self.data = OrderedDict()
+#         self.queue_key = deque()
     
     def get(self, key):
         if key in self.data:
-            self.reorder(key)
+            value = self.data.pop(key)
+            self.data[key] = value
             return self.data[key]
         return -1
     
     def set(self, key, value):
         if self.num_data < self.capacity:
             if key in self.data:
-                self.reorder(key)
+                value = self.data.pop(key)
+                self.data[key] = value
             else:
-                self.queue_key.append(key)
+#                 self.queue_key.append(key)
                 self.data[key] = value
                 self.num_data += 1
         else:
-            delete_key = self.queue_key.popleft()
-            self.data.pop(delete_key)
-            self.queue_key.append(key)
-            self.data[key] = value
-            self.num_data += 1
+            try:
+                delete_key = next(iter(self.data.keys()))
+                self.data.pop(delete_key)
+    #             self.queue_key.append(key)
+                self.data[key] = value
+                self.num_data += 1
+            except:
+                print("Set Error: no cache space can be used!")
     
-    def reorder(self, key):
-        self.queue_key.remove(key)
-        self.queue_key.append(key)
+#     def reorder(self, key):
+#         self.queue_key.remove(key)
+#         self.queue_key.append(key)
 
 
 ### test case
-print("Cases:___________________________________________________________________________")
+print("Cases1:___________________________________________________________________________")
 our_cache = LRU_Cache(5)
 
 our_cache.set(1,1)
@@ -52,3 +57,14 @@ our_cache.set(6, 6)
 
 print("True result of our_cache.get(1) is 1, and the output is {}.".format(our_cache.get(1)))
 print("True result of our_cache.get(3) is -1, and the output is {}.".format(our_cache.get(3)))
+
+
+print("\nCases2:___________________________________________________________________________")
+our_cache = LRU_Cache(1)
+
+print("True result of our_cache.get(1) is -1, and the output is {}.".format(our_cache.get(1)))
+
+print("\nCases3:___________________________________________________________________________")
+our_cache = LRU_Cache(0)
+our_cache.set(1,1) # set error are supposed to be printed
+print("True result of our_cache.get(1) is -1, and the output is {}.".format(our_cache.get(1)))

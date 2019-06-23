@@ -1,6 +1,6 @@
 - my solution
-    - use a hashmap(dictionary) to store data, use key to get data value
-    - use a deque to store key of hashmap, use FIFO/LILO rules to manage the capacity of cache
+    - use an ordered hashmap(dictionary) to store data, use key to get data value
+    - for hashmap is ordered, so which data is earliest stored is tracked
 
 - time complexity
     - o(1) for get/set operation
