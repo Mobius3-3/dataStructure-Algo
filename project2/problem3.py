@@ -4,12 +4,6 @@ class Node(object):
         self.left = None
         self.right = None
         self.chr = None
-    # def isLeft(self):
-    #     if self.parent == None:
-    #         return False
-    #     if self.parent.left == self:
-    #         return True
-    #     return False
 
 class Tree(object):
     def __init__(self, value=None):
@@ -27,6 +21,8 @@ def get_freq(data):
     return item
 
 def get_code(root):
+    if root == None:
+        return []
     if root.left == None and root.right == None:      
         return [root.chr]
     
@@ -41,6 +37,8 @@ def get_code(root):
 def huffman_encoding(data):
     item = get_freq(data)
     tree = Tree()
+    if len(item) == 0:
+        return 0,tree
     if len(item) == 1:
         root = Node(item[0][1])
         root.chr = item[0][0]
@@ -84,6 +82,8 @@ def huffman_encoding(data):
     
 def huffman_decoding(data, tree):
     root = tree.root
+    if root == None:
+        return ""
     if root.left == None and root.right == None:
         return root.chr * data
     codes = get_code(root)
@@ -125,7 +125,7 @@ print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data
 print ("The content of the encoded data is: {}\n".format(decoded_data))
 
 print("Case2:____________________________________________________________________________")
-a_great_sentence = "qwertyuiopasdfghklzxcvbnm" # no same character
+a_great_sentence = "" 
 
 print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
 print ("The content of the data is: {}\n".format(a_great_sentence))
@@ -133,7 +133,7 @@ print ("The content of the data is: {}\n".format(a_great_sentence))
 
 encoded_data, tree = huffman_encoding(a_great_sentence)
 
-print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(encoded_data)))
 print ("The content of the encoded data is: {}\n".format(encoded_data))
 
 decoded_data = huffman_decoding(encoded_data, tree)

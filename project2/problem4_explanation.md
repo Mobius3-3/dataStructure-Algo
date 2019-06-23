@@ -6,4 +6,4 @@
     - o(n) (n is amount of all groups and users under the input group)
 
 - space complexity
-    - o(1) (no data is stored)
+    - o(n) (traverse create state for all groups and users)

@@ -1,4 +1,4 @@
-from queue import Queue
+from collections import deque
 
 class LRU_Cache(object):
     
@@ -6,26 +6,32 @@ class LRU_Cache(object):
         self.capacity = capacity
         self.num_data = 0
         self.data = dict({})
-        self.queue_key = Queue()
+        self.queue_key = deque()
     
     def get(self, key):
         if key in self.data:
-#             self.queue_index.put(key)
+            self.reorder(key)
             return self.data[key]
         return -1
     
     def set(self, key, value):
         if self.num_data < self.capacity:
-            self.queue_key.put(key)
-            self.data[key] = value
-            self.num_data += 1
+            if key in self.data:
+                self.reorder(key)
+            else:
+                self.queue_key.append(key)
+                self.data[key] = value
+                self.num_data += 1
         else:
-            delete_key = self.queue_key.get()
+            delete_key = self.queue_key.popleft()
             self.data.pop(delete_key)
-            self.queue_key.put(key)
+            self.queue_key.append(key)
             self.data[key] = value
             self.num_data += 1
-            
+    
+    def reorder(self, key):
+        self.queue_key.remove(key)
+        self.queue_key.append(key)
 
 
 ### test case
@@ -44,5 +50,5 @@ print("True result of our_cache.get(9) is -1, and the output is {}.".format(our_
 our_cache.set(5, 5)
 our_cache.set(6, 6)
 
-print("True result of our_cache.get(1) is -1, and the output is {}.".format(our_cache.get(1)))
-print("True result of our_cache.get(3) is 3, and the output is {}.".format(our_cache.get(3)))
+print("True result of our_cache.get(1) is 1, and the output is {}.".format(our_cache.get(1)))
+print("True result of our_cache.get(3) is -1, and the output is {}.".format(our_cache.get(3)))
