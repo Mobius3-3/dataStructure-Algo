@@ -1,0 +1,11 @@
+- Analysis
+    - create TrieNode and Trie structure containing function of insertion and checking.
+    - add suffix function by recurse leave word in trie 
+
+- Complexity
+    - basic function(insertion and checking)
+        - Time: O(n), linear time to the length of word
+        - Space: O(n), the space of the length of word
+    - suffix function 
+        - Time: O(depth * width) recurse search all character saved
+        - Space: O(all words), all the word exits
